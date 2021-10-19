@@ -4,6 +4,9 @@
 #include <fstream>
 #include <sstream>
 
+#include "Course.h"
+#include "Test.h"
+
 using namespace std;
 
 int main(int argc, char** argv) {
@@ -18,7 +21,6 @@ inline string removeSpaces(string str) {
     str.erase(remove(str.begin(), str.end(), ' '), str.end());
     return str;
 }
-
 
 unordered_map<int, Course> parseCourses(const char* coursesFileName) {
     ifstream coursesFile;
@@ -72,83 +74,3 @@ unordered_map<int, Course> parseAndAddTests(const char* testsFileName, unordered
     testsFile.close();
     return courses;
 }
-
-
-
-class Test {    
-private:
-    int id;
-    int weight;
-public:
-    // Test() {}
-    Test(int id, int weight) {
-        this->id = id;
-        this->weight = weight;
-    }
-    int getWeight() {
-        return weight;
-    }
-};
-
-
-
-class Course {
-private:
-    int id;
-    string name;
-    string teacher;
-    vector<Test> tests;
-public:
-    Course(){}
-
-    Course(int id, string name, string teacher) {
-        this->id = id;
-        this->name = name;
-        this->teacher = teacher;
-    }
-
-    int getId() {
-        return id;
-    }
-
-    string getTeacher() {
-        return teacher;
-    }
-
-    void addTest(Test test) {
-        this->tests.push_back(test);
-    }
-
-    int sumTestWeights() {
-        int sum = 0;
-        for(vector<Test>::iterator it = tests.begin() ; it < tests.end(); it++) {
-            sum += it->getWeight();
-        } 
-        return sum;
-    }
-};
-
-class StudentCourse {
-private:
-    Course course;
-    float courseAverage;
-
-public:
-    StudentCourse(int id, string name, string teacher) {
-        course = Course(id, name, teacher);
-    }
-};
-
-class Student {
-private:
-    int id;
-    string name;
-    vector<StudentCourse> courses;
-public:
-    Student(int id, string name) {
-        this->id = id;
-        this->name = name;
-    }
-    
-};
-
