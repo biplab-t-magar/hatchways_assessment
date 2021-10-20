@@ -2,7 +2,7 @@
 #ifndef STUDENT_COURSE_H
 #define STUDENT_COURSE_H
 
-#include "Course.h";
+#include "Course.h"
 
 class StudentCourse {
 private:

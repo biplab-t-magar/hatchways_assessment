@@ -11,6 +11,10 @@ int Course::getId() {
     return id;
 }
 
+std::string Course::getName() {
+    return name;
+}
+
 std::string Course::getTeacher() {
     return teacher;
 }

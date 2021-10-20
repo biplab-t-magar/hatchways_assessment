@@ -18,7 +18,7 @@ public:
     Course(int id, std::string name, std::string teacher);
     int getId();
     std::string getTeacher();
-
+    std::string getName();
     void addTest(Test test);
     int sumTestWeights();
 };

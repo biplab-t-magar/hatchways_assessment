@@ -1,6 +1,12 @@
-assessment: Course.o Student.o StudentCourse.o Test.o assessment.o
-	g++ -std=c++0x Course.o Student.o StudentCourse.o Test.o assessment.o -o assessment
+main: Course.o Student.o StudentCourse.o Test.o parsing.o main.o
+	g++ -std=c++0x Course.o Student.o StudentCourse.o Test.o parsing.o main.o -o main
 
+unitTests: Course.o Student.o StudentCourse.o Test.o parsing.o unitTests.o
+	g++ -std=c++0x Course.o Student.o StudentCourse.o Test.o parsing.o unitTests.o -o unitTests
+
+main.o: main.cpp 
+	g++ -c -std=c++0x main.cpp
+	
 Course.o: Course.cpp Course.h
 	g++ -c -std=c++0x Course.cpp
 
@@ -13,8 +19,11 @@ StudentCourse.o: StudentCourse.cpp StudentCourse.h
 Test.o: Test.cpp Test.h
 	g++ -c -std=c++0x Test.cpp
 
-assessment.o: assessment.cpp 
-	g++ -c -std=c++0x assessment.cpp
+parsing.o: parsing.cpp parsing.h
+	g++ -c -std=c++0x parsing.cpp
+
+unitTests.o: unitTests.cpp
+	g++ -c -std=c++0x unitTests.cpp
 
 clean:
-	rm *.o assessment
+	rm *.o main unitTests
