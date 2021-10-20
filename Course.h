@@ -21,6 +21,7 @@ public:
     std::string getName();
     void addTest(Test test);
     int sumTestWeights();
+    std::vector<Test> getTests();
 };
 
 #endif

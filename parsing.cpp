@@ -23,9 +23,7 @@ inline string removeOuterSpaces(string str) {
 unordered_map<int, Course> parseCourses(const char* coursesFileName) {
     ifstream coursesFile;
 
-    string fileName(coursesFileName);
-    cout << fileName << endl;
-    coursesFile.open(fileName);
+    coursesFile.open(coursesFileName);
     if(!coursesFile.is_open()) {
         string msg(coursesFileName);
         throw runtime_error("Cannot open the file " + msg);

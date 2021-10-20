@@ -30,3 +30,7 @@ int Course::sumTestWeights() {
     } 
     return sum;
 }
+
+std::vector<Test> Course::getTests() {
+    return this->tests;
+}

@@ -4,13 +4,15 @@
 
 using namespace std;
 
-void testParseCoursesFunction();
+void testParseCourses();
+void testParseAndAddTests();
 
 int main() {
-    testParseCoursesFunction();
+    testParseCourses();
+    testParseAndAddTests();
 }
 
-void testParseCoursesFunction() {
+void testParseCourses() {
     std::unordered_map<int, Course> courses = parseCourses("./testFiles/test1/courses.csv");
 
     assert(courses[1].getId() == 1);
@@ -25,17 +27,41 @@ void testParseCoursesFunction() {
     assert(courses[3].getName() == "Math");
     assert(courses[3].getTeacher() == "Mrs. C");
 
-    std::cout << "Passed testParseCoursesFunction" << std::endl;
+    std::cout << "Passed testParseCourses" << std::endl;
 }
 
-void testParseAndAddTestsFunction() {
+void testParseAndAddTests() {
 
     //populate courses unordered map
     //make sure parseCourse is well tested
-    testParseCoursesFunction();
+    testParseCourses();
 
     std::unordered_map<int, Course> courses = parseCourses("./testFiles/test1/courses.csv");
 
     //parse tests and add to courses objects
     courses = parseAndAddTests("./testFiles/test1/tests.csv", courses);
+
+    int results[7][3] = {{1, 1, 10}, {2, 1, 40}, {3, 1, 50}, {4, 2, 40}, {5, 2, 60}, {6, 3, 90}, {7, 3, 10}};
+
+    assert(courses.size() == 3);
+
+    //test first course
+    std::vector<Test> tests = courses[1].getTests();
+    assert(tests[0].getWeight() == 10);
+    assert(tests[1].getWeight() == 40);
+    assert(tests[2].getWeight() == 50);
+    
+    //test second course
+    tests = courses[2].getTests();
+    assert(tests[0].getWeight() == 40);
+    assert(tests[1].getWeight() == 60);
+
+    //test third course
+    tests = courses[3].getTests();
+    assert(tests[0].getWeight() == 90);
+    assert(tests[1].getWeight() == 10);
+
+    std::cout << "Passed testParseAndAddTests" << std::endl;
+
+    
 }
