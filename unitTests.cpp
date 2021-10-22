@@ -1,4 +1,5 @@
 #include "parsing.h"
+#include "objectPrep.h"
 #include <assert.h>
 #include <iostream>
 
@@ -97,5 +98,9 @@ void testParseMarks() {
 }
 
 void testPopulateStudentCourses() {
-    
+    courses = parseCourses("./testFiles/test1/courses.csv");
+    tests = parseTests("./testFiles/test1/tests.csv");
+    students = parseStudents("./testFiles/test1/students.csv");
+    marks = parseMarks("./testFiles/test1/marks.csv");
+
 }

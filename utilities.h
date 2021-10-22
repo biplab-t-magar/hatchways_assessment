@@ -1,6 +1,6 @@
 #pragma once
-#ifndef OBJECT_PREP_H
-#define OBJECT_PREP_H
+#ifndef UTILITIES_H
+#define UTILITIES_H
 
 #include <unordered_map>
 #include <vector>
