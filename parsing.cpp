@@ -39,6 +39,7 @@ map<int, Course> parseCourses(const char* coursesFileName) {
     if(row != "id,name,teacher") throw runtime_error("Invalid courses file");
 
     while(getline(coursesFile, row)) {
+        if(removeSpaces(row) == "" || removeSpaces(row) == "\n") continue;
         stringstream ss(row);
 
         getline(ss, word, ',');
@@ -84,22 +85,32 @@ map<int, Test> parseTests(const char* testsFileName) {
 
 
     while(getline(testsFile, row)) {
+        if(removeSpaces(row) == "" || removeSpaces(row) == "\n") continue;
         stringstream ss(row);
 
         getline(ss, word, ',');
         word = removeOuterSpaces(word);
+        // std::cout << word << std::endl;
         int testId = stoi(word);
 
         getline(ss, word, ',');
         word = removeOuterSpaces(word);
+        // std::cout << word << std::endl;
+
         int courseId = stoi(word);
 
         getline(ss, word, ',');
         word = removeOuterSpaces(word);
+        // std::cout << word << std::endl;
+
         int weight = stoi(word);
 
+
         tests[testId] = Test(testId, courseId, weight);
+        // std::cout << "here1" << std::endl;
+
     }
+
 
     testsFile.close();
     if(testsFile.is_open()) {
@@ -129,6 +140,7 @@ map<int , Student> parseStudents(const char* studentsFileName) {
     if(row != "id,name") throw runtime_error("Invalid students file");
 
     while(getline(studentsFile, row)) {
+        if(removeSpaces(row) == "" || removeSpaces(row) == "\n") continue;
         stringstream ss(row);
 
         getline(ss, word, ',');
@@ -174,6 +186,7 @@ vector<Mark> parseMarks(const char* marksFileName) {
     // }
 
     while(getline(marksFile, row)) {
+        if(removeSpaces(row) == "" || removeSpaces(row) == "\n") continue;
         stringstream ss(row);
 
         getline(ss, word, ',');
