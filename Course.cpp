@@ -19,18 +19,18 @@ std::string Course::getTeacher() {
     return teacher;
 }
 
-void Course::addTest(Test test) {
-    this->tests.push_back(test);
-}
+// void Course::addTest(Test test) {
+//     this->tests[test.getId()] = test;
+// }
 
-int Course::sumTestWeights() {
-    int sum = 0;
-    for(std::vector<Test>::iterator it = tests.begin() ; it < tests.end(); it++) {
-        sum += it->getWeight();
-    } 
-    return sum;
-}
+// int Course::sumTestWeights() {
+//     int sum = 0;
+//     for(std::unordered_map<int, Test>::iterator it = tests.begin() ; it != tests.end(); it++) {
+//         sum += it->second.getWeight();
+//     } 
+//     return sum;
+// }
 
-std::vector<Test> Course::getTests() {
-    return this->tests;
-}
+// std::unordered_map<int, Test> Course::getTests() {
+//     return this->tests;
+// }

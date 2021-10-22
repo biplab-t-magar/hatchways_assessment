@@ -3,15 +3,14 @@
 #define COURSE_H
 
 #include <string>
-#include <vector>
-#include "Test.h"
+#include <unordered_map>
 
 class Course {
 private:
     int id;
     std::string name;
     std::string teacher;
-    std::vector<Test> tests;
+    // std::unordered_map<int, Test> tests;
 public:
     public:
     Course(){}
@@ -19,9 +18,9 @@ public:
     int getId();
     std::string getTeacher();
     std::string getName();
-    void addTest(Test test);
-    int sumTestWeights();
-    std::vector<Test> getTests();
+    // void addTest(Test test);
+    // int sumTestWeights();
+    // std::unordered_map<int, Test> getTests();
 };
 
 #endif

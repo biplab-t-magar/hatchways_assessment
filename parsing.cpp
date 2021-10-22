@@ -57,10 +57,14 @@ unordered_map<int, Course> parseCourses(const char* coursesFileName) {
     }
 
     coursesFile.close();
+    if(coursesFile.is_open()) {
+        string msg(coursesFileName);
+        throw runtime_error("Cannot close the file " + msg);
+    }
     return courses;
 }
 
-unordered_map<int, Course> parseAndAddTests(const char* testsFileName, unordered_map<int, Course> courses) {
+unordered_map<int, Test> parseTests(const char* testsFileName) {
     ifstream testsFile;
 
     testsFile.open(testsFileName);
@@ -71,11 +75,13 @@ unordered_map<int, Course> parseAndAddTests(const char* testsFileName, unordered
 
     string row;
     string word;
+    unordered_map<int, Test> tests;
 
     //remove header row
     getline(testsFile, row);
     row = removeSpaces(row);
     if(row != "id,course_id,weight") throw runtime_error("Invalid tests file");
+
 
     while(getline(testsFile, row)) {
         stringstream ss(row);
@@ -92,9 +98,105 @@ unordered_map<int, Course> parseAndAddTests(const char* testsFileName, unordered
         word = removeOuterSpaces(word);
         int weight = stoi(word);
 
-        courses[courseId].addTest(Test(testId, weight));
+        tests[testId] = Test(testId, courseId, weight);
     }
 
     testsFile.close();
-    return courses;
+    if(testsFile.is_open()) {
+        string msg(testsFileName);
+        throw runtime_error("Cannot close the file " + msg);
+    }
+    return tests;
+}
+
+unordered_map<int , Student> parseStudents(const char* studentsFileName) {
+
+    ifstream studentsFile;
+
+    studentsFile.open(studentsFileName);
+    if(!studentsFile.is_open()) {
+        string msg(studentsFileName);
+        throw runtime_error("Cannot open the file " + msg);
+    }
+
+    string row;
+    string word;
+    unordered_map<int, Student> students;
+
+    //remove header row
+    getline(studentsFile, row);
+    row = removeSpaces(row);
+    if(row != "id,name") throw runtime_error("Invalid students file");
+
+    while(getline(studentsFile, row)) {
+        stringstream ss(row);
+
+        getline(ss, word, ',');
+        word = removeOuterSpaces(word);
+        int studentId = stoi(word);
+
+        getline(ss, word, ',');
+        word = removeOuterSpaces(word);
+        string studentName = word;
+
+        students[studentId] = Student(studentId, studentName);
+    }
+
+    studentsFile.close();
+    if(studentsFile.is_open()) {
+        string msg(studentsFileName);
+        throw runtime_error("Cannot close the file " + msg);
+    }
+
+
+    return students;
+}
+
+vector<Mark> parseMarks(const char* marksFileName) {
+    ifstream marksFile;
+
+    marksFile.open(marksFileName);
+    if(!marksFile.is_open()) {
+        string msg(marksFileName);
+        throw runtime_error("Cannot open the file " + msg);
+    }
+
+    string row;
+    string word;
+    vector<Mark> marks;
+
+    //remove header row
+    getline(marksFile, row);
+    // row = removeSpaces(row);
+
+    // if(row != "test_id,student_id,mark") {
+    //     throw runtime_error("Invalid marks file");
+    // }
+
+    while(getline(marksFile, row)) {
+        stringstream ss(row);
+
+        getline(ss, word, ',');
+        word = removeOuterSpaces(word);
+        int testId = stoi(word);
+
+        getline(ss, word, ',');
+        word = removeOuterSpaces(word);
+        int studentId = stoi(word);
+
+        getline(ss, word, ',');
+        word = removeOuterSpaces(word);
+        int mark = stoi(word);
+
+        marks.push_back(Mark(testId, studentId, mark));
+    }
+
+    marksFile.close();
+    if(marksFile.is_open()) {
+        string msg(marksFileName);
+        throw runtime_error("Cannot close the file " + msg);
+    }
+
+    return marks;
+
 }
