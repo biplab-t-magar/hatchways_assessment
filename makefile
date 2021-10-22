@@ -1,8 +1,8 @@
-main: Course.o Student.o StudentCourse.o Test.o Mark.o parsing.o main.o
-	g++ -std=c++0x Course.o Student.o StudentCourse.o Test.o Mark.o parsing.o main.o -o main
+main: Course.o Student.o StudentCourse.o Test.o Mark.o parsing.o objectPrep.o main.o
+	g++ -std=c++0x Course.o Student.o StudentCourse.o Test.o Mark.o parsing.o objectPrep.o main.o -o main
 
-unitTests: Course.o Student.o StudentCourse.o Test.o Mark.o parsing.o unitTests.o
-	g++ -std=c++0x Course.o Student.o StudentCourse.o Test.o Mark.o parsing.o unitTests.o -o unitTests
+unitTests: Course.o Student.o StudentCourse.o Test.o Mark.o parsing.o objectPrep.o unitTests.o
+	g++ -std=c++0x Course.o Student.o StudentCourse.o Test.o Mark.o parsing.o objectPrep.o unitTests.o -o unitTests
 
 main.o: main.cpp 
 	g++ -c -std=c++0x main.cpp
@@ -24,6 +24,9 @@ Mark.o: Mark.cpp Mark.h
 
 parsing.o: parsing.cpp parsing.h
 	g++ -c -std=c++0x parsing.cpp
+
+objectPrep.o: objectPrep.cpp objectPrep.h
+	g++ -c -std=c++0x objectPrep.cpp
 
 unitTests.o: unitTests.cpp
 	g++ -c -std=c++0x unitTests.cpp

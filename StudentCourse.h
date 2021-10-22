@@ -9,12 +9,13 @@ class StudentCourse {
 private:
     Course course;
     float courseAverage;
-    std::unordered_map<int, Test> marks;
+    int totalMarks;
 public:
+    StudentCourse(){}
     StudentCourse(int id, std::string name, std::string teacher);
     StudentCourse(Course course);
-    void addMarks(int testId, int marks);
-    
+    void addWeightedMarks(int marks);
+    int getId();
 };
 
 #endif

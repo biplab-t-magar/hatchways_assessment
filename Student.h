@@ -9,14 +9,16 @@ class Student {
 private:
     int id;
     std::string name;
-    std::vector<StudentCourse> courses;
+    std::unordered_map<int, StudentCourse> courses;
 public:
     Student(){}
     Student(int id, std::string name);
     int getId();
     std::string getName();
+    bool courseTaken(int courseId);
     void addCourse(StudentCourse course);
-    
+    void addWeightedCourseMark(int courseId, int weightedMark);
+
 };
 
 #endif

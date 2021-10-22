@@ -1,6 +1,6 @@
 #pragma once
-#ifndef ASSESSMENT_H
-#define ASSESSMENT_H
+#ifndef PARSING_H
+#define PARSING_H
 
 #include "Course.h"
 #include "Student.h"

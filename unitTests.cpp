@@ -76,7 +76,8 @@ void testParseStudents() {
     std::cout << "Passed testParseStudents" << std::endl;
 }
 
-void testParseMarks() {
+void testParseMarks() { 
+
     std::vector<Mark> marks = parseMarks("./testFiles/test1/marks.csv");
 
     assert(marks[0].getTestId() == 1);
@@ -93,4 +94,8 @@ void testParseMarks() {
 
 
     std::cout << "Passed testParseCourses" << std::endl;
+}
+
+void testPopulateStudentCourses() {
+    
 }
