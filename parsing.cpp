@@ -20,7 +20,7 @@ inline string removeOuterSpaces(string str) {
     return str;
 }
 
-unordered_map<int, Course> parseCourses(const char* coursesFileName) {
+map<int, Course> parseCourses(const char* coursesFileName) {
     ifstream coursesFile;
 
     coursesFile.open(coursesFileName);
@@ -31,7 +31,7 @@ unordered_map<int, Course> parseCourses(const char* coursesFileName) {
 
     string row;
     string word;
-    unordered_map<int, Course> courses;
+    map<int, Course> courses;
 
     //remove header row
     getline(coursesFile, row);
@@ -64,7 +64,7 @@ unordered_map<int, Course> parseCourses(const char* coursesFileName) {
     return courses;
 }
 
-unordered_map<int, Test> parseTests(const char* testsFileName) {
+map<int, Test> parseTests(const char* testsFileName) {
     ifstream testsFile;
 
     testsFile.open(testsFileName);
@@ -75,7 +75,7 @@ unordered_map<int, Test> parseTests(const char* testsFileName) {
 
     string row;
     string word;
-    unordered_map<int, Test> tests;
+    map<int, Test> tests;
 
     //remove header row
     getline(testsFile, row);

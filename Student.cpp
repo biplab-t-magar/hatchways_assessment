@@ -1,4 +1,5 @@
 #include "Student.h"
+#include <math.h>
 
 Student::Student(int id, std::string name) {
     this->id = id;
@@ -32,12 +33,12 @@ void Student::addWeightedCourseMark(int courseId, float weightedMark) {
 
 float Student::calculateTotalAverage() {
     float totalAverage;
-    for(std::unordered_map<int, StudentCourse>::iterator it = courses.begin(); it != courses.end(); it++) {
+    for(std::map<int, StudentCourse>::iterator it = courses.begin(); it != courses.end(); it++) {
         totalAverage += it->second.getCourseAverage();
     }
-    return round( 100.0 * totalAverage / this->courses.size()) / 100.0;
+    return roundf( 100.0 * totalAverage / this->courses.size()) / 100.0;
 }
 
-std::unordered_map<int, StudentCourse> Student::getCoursesTaken() {
+std::map<int, StudentCourse> Student::getCoursesTaken() {
     return courses;
 }

@@ -1,8 +1,10 @@
 #include <iostream>
 #include "parsing.h"
 #include "utilities.h"
+#include "serialization.h"
 
 using namespace std;
+
 
 int main(int argc, char** argv) {
     if(argc < 6) {
@@ -10,21 +12,21 @@ int main(int argc, char** argv) {
         return 1;
     }
     
-    unordered_map<int, Test> tests;
-    unordered_map<int, Course> courses;
+    map<int, Test> tests;
+    map<int, Course> courses;
     map<int, Student> students;
     vector<Mark> marks;
     try {
         courses = parseCourses(argv[1]);
         tests = parseTests(argv[3]);
-        students = parseStudents(argv[2]);
     } catch(runtime_error& e) {
         cerr << e.what() << endl;
         return 1;
     }
     
-    if(validCourseWeights(courses, tests)) {
-        cerr << "Bad weights" << endl;
+    if(!validCourseWeights(courses, tests)) {
+        outputToFile(argv[5], generateErrorJson("Invalid course weights"));
+        return 1;
     }
 
     try {
@@ -36,6 +38,8 @@ int main(int argc, char** argv) {
     }
 
     students = populateStudentCourses(students, courses, tests, marks);
-
+    outputToFile(argv[5], generateJson(students));
 }
+
+
 

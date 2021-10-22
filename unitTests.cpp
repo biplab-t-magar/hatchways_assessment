@@ -26,7 +26,7 @@ int main() {
 }
 
 void testParseCourses() {
-    std::unordered_map<int, Course> courses = parseCourses("./testFiles/test1/courses.csv");
+    std::map<int, Course> courses = parseCourses("./testFiles/test1/courses.csv");
 
     assert(courses[1].getId() == 1);
     assert(courses[1].getName() == "Biology");
@@ -45,7 +45,7 @@ void testParseCourses() {
 
 void testParseTests() {
 
-    std::unordered_map<int, Test> tests = parseTests("./testFiles/test1/tests.csv");
+    std::map<int, Test> tests = parseTests("./testFiles/test1/tests.csv");
 
     assert(tests[1].getId() == 1);
     assert(tests[1].getCourseId() == 1);
@@ -106,8 +106,8 @@ void testParseMarks() {
 }
 
 void testValidCourseWeights() {
-    std::unordered_map<int, Course> courses = parseCourses("./testFiles/test1/courses.csv");
-    std::unordered_map<int, Test> tests = parseTests("./testFiles/test1/tests.csv");
+    std::map<int, Course> courses = parseCourses("./testFiles/test1/courses.csv");
+    std::map<int, Test> tests = parseTests("./testFiles/test1/tests.csv");
     
     assert(validCourseWeights(courses, tests));
 
@@ -120,8 +120,8 @@ void testValidCourseWeights() {
 }
 
 void testPopulateStudentCourses() {
-    std::unordered_map<int, Course> courses = parseCourses("./testFiles/test1/courses.csv");
-    std::unordered_map<int, Test> tests = parseTests("./testFiles/test1/tests.csv");
+    std::map<int, Course> courses = parseCourses("./testFiles/test1/courses.csv");
+    std::map<int, Test> tests = parseTests("./testFiles/test1/tests.csv");
     std::map<int, Student> students = parseStudents("./testFiles/test1/students.csv");
     std::vector<Mark> marks = parseMarks("./testFiles/test1/marks.csv");
 
@@ -135,12 +135,11 @@ void testPopulateStudentCourses() {
 }
 
 void testGenerateJson() {
-    std::unordered_map<int, Course> courses = parseCourses("./testFiles/test1/courses.csv");
-    std::unordered_map<int, Test> tests = parseTests("./testFiles/test1/tests.csv");
+    std::map<int, Course> courses = parseCourses("./testFiles/test1/courses.csv");
+    std::map<int, Test> tests = parseTests("./testFiles/test1/tests.csv");
     std::map<int, Student> students = parseStudents("./testFiles/test1/students.csv");
     std::vector<Mark> marks = parseMarks("./testFiles/test1/marks.csv");
     students = populateStudentCourses(students, courses, tests, marks);
 
     std::cout << generateJson(students) << std::endl;
-
 }

@@ -24,9 +24,9 @@ string generateStudentJson(Student student) {
     ss << "      \"totalAverage\": " << student.calculateTotalAverage() << ",\n";
     ss << "      \"courses\": [\n";
     
-    unordered_map<int, StudentCourse> courses = student.getCoursesTaken();
-    unordered_map<int, StudentCourse>::iterator stepAheadIterator;
-    for(unordered_map<int, StudentCourse>::iterator it = courses.begin(); it != courses.end(); it++) {
+    map<int, StudentCourse> courses = student.getCoursesTaken();
+    map<int, StudentCourse>::iterator stepAheadIterator;
+    for(map<int, StudentCourse>::iterator it = courses.begin(); it != courses.end(); it++) {
         ss << generateCourseJson(it->second);
         stepAheadIterator = it;
         if(++stepAheadIterator != courses.end()) ss << ",";
@@ -55,4 +55,8 @@ string generateJson(map<int, Student> students) {
     ss << "}";
 
     return ss.str();
+}
+
+std::string generateErrorJson(std::string errorMessage) {
+    return "{\n  \"error\": \"" + errorMessage + "\"\n}";
 }

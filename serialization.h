@@ -8,5 +8,6 @@
 std::string generateCourseJson(StudentCourse course);
 std::string generateStudentJson(Student student);
 std::string generateJson(std::map<int, Student> students);
+std::string generateErrorJson(std::string errorMessage);
 
 #endif
