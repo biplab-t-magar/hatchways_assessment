@@ -1,5 +1,6 @@
 #include "parsing.h"
-#include "objectPrep.h"
+#include "utilities.h"
+#include "serialization.h"
 #include <assert.h>
 #include <iostream>
 
@@ -9,12 +10,19 @@ void testParseCourses();
 void testParseTests();
 void testParseStudents();
 void testParseMarks();
+void testValidCourseWeights();
+void testPopulateStudentCourses();
+void testGenerateJson();
+
 
 int main() {
     testParseCourses();
     testParseTests();
     testParseStudents();
     testParseMarks();
+    testValidCourseWeights();
+    testPopulateStudentCourses();
+    testGenerateJson();
 }
 
 void testParseCourses() {
@@ -63,16 +71,16 @@ void testParseTests() {
 }
 
 void testParseStudents() {
-    std::unordered_map<int, Student> courses = parseStudents("./testFiles/test1/students.csv");
+    std::map<int, Student> students = parseStudents("./testFiles/test1/students.csv");
 
-    assert(courses[1].getId() == 1);
-    assert(courses[1].getName() == "A");
+    assert(students[1].getId() == 1);
+    assert(students[1].getName() == "A");
 
-    assert(courses[2].getId() == 2);
-    assert(courses[2].getName() == "B");
+    assert(students[2].getId() == 2);
+    assert(students[2].getName() == "B");
 
-    assert(courses[3].getId() == 3);
-    assert(courses[3].getName() == "C");
+    assert(students[3].getId() == 3);
+    assert(students[3].getName() == "C");
 
     std::cout << "Passed testParseStudents" << std::endl;
 }
@@ -97,10 +105,42 @@ void testParseMarks() {
     std::cout << "Passed testParseCourses" << std::endl;
 }
 
+void testValidCourseWeights() {
+    std::unordered_map<int, Course> courses = parseCourses("./testFiles/test1/courses.csv");
+    std::unordered_map<int, Test> tests = parseTests("./testFiles/test1/tests.csv");
+    
+    assert(validCourseWeights(courses, tests));
+
+    tests[1] = Test(1, 1, 90);
+
+    assert(!validCourseWeights(courses, tests));
+
+    std::cout << "Passed testValidCourseWeights" << std::endl;
+
+}
+
 void testPopulateStudentCourses() {
-    courses = parseCourses("./testFiles/test1/courses.csv");
-    tests = parseTests("./testFiles/test1/tests.csv");
-    students = parseStudents("./testFiles/test1/students.csv");
-    marks = parseMarks("./testFiles/test1/marks.csv");
+    std::unordered_map<int, Course> courses = parseCourses("./testFiles/test1/courses.csv");
+    std::unordered_map<int, Test> tests = parseTests("./testFiles/test1/tests.csv");
+    std::map<int, Student> students = parseStudents("./testFiles/test1/students.csv");
+    std::vector<Mark> marks = parseMarks("./testFiles/test1/marks.csv");
+
+    students = populateStudentCourses(students, courses, tests, marks);
+
+    assert(students[1].calculateTotalAverage() * 100 == 7203);
+    assert(students[2].calculateTotalAverage() * 100 == 6215);
+    assert(students[3].calculateTotalAverage() * 100 == 7203);
+
+    std::cout << "Passed testPopulateStudentCourses" << std::endl;
+}
+
+void testGenerateJson() {
+    std::unordered_map<int, Course> courses = parseCourses("./testFiles/test1/courses.csv");
+    std::unordered_map<int, Test> tests = parseTests("./testFiles/test1/tests.csv");
+    std::map<int, Student> students = parseStudents("./testFiles/test1/students.csv");
+    std::vector<Mark> marks = parseMarks("./testFiles/test1/marks.csv");
+    students = populateStudentCourses(students, courses, tests, marks);
+
+    std::cout << generateJson(students) << std::endl;
 
 }

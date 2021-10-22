@@ -23,8 +23,21 @@ void Student::addCourse(StudentCourse course) {
     }
 }
 
-void Student::addWeightedCourseMark(int courseId, int weightedMark) {
+void Student::addWeightedCourseMark(int courseId, float weightedMark) {
     if(courses.count(courseId) > 0) {
         courses[courseId].addWeightedMarks(weightedMark);
     }
+}
+
+
+float Student::calculateTotalAverage() {
+    float totalAverage;
+    for(std::unordered_map<int, StudentCourse>::iterator it = courses.begin(); it != courses.end(); it++) {
+        totalAverage += it->second.getCourseAverage();
+    }
+    return round( 100.0 * totalAverage / this->courses.size()) / 100.0;
+}
+
+std::unordered_map<int, StudentCourse> Student::getCoursesTaken() {
+    return courses;
 }

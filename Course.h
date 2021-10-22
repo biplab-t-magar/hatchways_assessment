@@ -21,6 +21,9 @@ public:
     // void addTest(Test test);
     // int sumTestWeights();
     // std::unordered_map<int, Test> getTests();
+    // void print() {
+    //     std::cout << "Course " << id << ", " << name << ", " << teacher << std::endl;
+    // }
 };
 
 #endif

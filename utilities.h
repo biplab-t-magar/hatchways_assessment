@@ -3,6 +3,7 @@
 #define UTILITIES_H
 
 #include <unordered_map>
+#include <map>
 #include <vector>
 #include "Course.h"
 #include "Test.h"
@@ -10,7 +11,7 @@
 #include "Mark.h"
 
 float percentToWeightedMark(int, int);
-bool testCourseWeights(std::unordered_map<int, Course>, std::unordered_map<int, Test>);
-std::unordered_map<int, Student> populateStudentCourses(std::unordered_map<int, Student>, std::unordered_map<int, Course>, std::unordered_map<int, Test>, std::vector<Mark>);
+bool validCourseWeights(std::unordered_map<int, Course>, std::unordered_map<int, Test>);
+std::map<int, Student> populateStudentCourses(std::map<int, Student>, std::unordered_map<int, Course>, std::unordered_map<int, Test>, std::vector<Mark>);
 
 #endif

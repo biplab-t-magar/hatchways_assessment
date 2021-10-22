@@ -8,14 +8,16 @@
 class StudentCourse {
 private:
     Course course;
-    float courseAverage;
-    int totalMarks;
+    float totalMarks = 0;
 public:
     StudentCourse(){}
     StudentCourse(int id, std::string name, std::string teacher);
     StudentCourse(Course course);
-    void addWeightedMarks(int marks);
+    void addWeightedMarks(float marks);
     int getId();
+    std::string getTeacher();
+    std::string getName();
+    float getCourseAverage();
 };
 
 #endif

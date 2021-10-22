@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
     
     unordered_map<int, Test> tests;
     unordered_map<int, Course> courses;
-    unordered_map<int, Student> students;
+    map<int, Student> students;
     vector<Mark> marks;
     try {
         courses = parseCourses(argv[1]);
@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
         return 1;
     }
     
-    if(testCourseWeights(courses, tests)) {
+    if(validCourseWeights(courses, tests)) {
         cerr << "Bad weights" << endl;
     }
 

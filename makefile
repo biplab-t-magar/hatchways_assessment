@@ -1,8 +1,8 @@
-main: Course.o Student.o StudentCourse.o Test.o Mark.o parsing.o utilities.o main.o
-	g++ -std=c++0x Course.o Student.o StudentCourse.o Test.o Mark.o parsing.o utilities.o main.o -o main
+main: Course.o Student.o StudentCourse.o Test.o Mark.o parsing.o utilities.o serialization.o main.o
+	g++ -std=c++0x Course.o Student.o StudentCourse.o Test.o Mark.o parsing.o utilities.o serialization.o main.o -o main
 
-unitTests: Course.o Student.o StudentCourse.o Test.o Mark.o parsing.o utilities.o unitTests.o
-	g++ -std=c++0x Course.o Student.o StudentCourse.o Test.o Mark.o parsing.o utilities.o unitTests.o -o unitTests
+unitTests: Course.o Student.o StudentCourse.o Test.o Mark.o parsing.o utilities.o serialization.o unitTests.o
+	g++ -std=c++0x Course.o Student.o StudentCourse.o Test.o Mark.o parsing.o utilities.o serialization.o unitTests.o -o unitTests
 
 main.o: main.cpp 
 	g++ -c -std=c++0x main.cpp
@@ -27,6 +27,9 @@ parsing.o: parsing.cpp parsing.h
 
 utilities.o: utilities.cpp utilities.h
 	g++ -c -std=c++0x utilities.cpp
+
+serialization.o: serialization.cpp serialization.h
+	g++ -c -std=c++0x serialization.cpp
 
 unitTests.o: unitTests.cpp
 	g++ -c -std=c++0x unitTests.cpp

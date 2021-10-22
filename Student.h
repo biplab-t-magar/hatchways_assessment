@@ -17,8 +17,9 @@ public:
     std::string getName();
     bool courseTaken(int courseId);
     void addCourse(StudentCourse course);
-    void addWeightedCourseMark(int courseId, int weightedMark);
-
+    void addWeightedCourseMark(int courseId, float weightedMark);
+    float calculateTotalAverage();
+    std::unordered_map<int, StudentCourse> getCoursesTaken();
 };
 
 #endif

@@ -2,15 +2,15 @@
 
 using namespace std;
 
-bool testCourseWeights(unordered_map<int, Course> courses, unordered_map<int, Test> tests) {
+bool validCourseWeights(unordered_map<int, Course> courses, unordered_map<int, Test> tests) {
     std:unordered_map<int, int> totalCourseWeights;
 
     //calculate total weights for each course
     for(unordered_map<int,Test>::iterator it = tests.begin(); it != tests.end(); it++) {
         if(totalCourseWeights.count(it->second.getCourseId()) == 0) {
-            totalCourseWeights[it->second.getCourseId()] = 0;
+            totalCourseWeights[it->second.getCourseId()] = it->second.getWeight();
         } else {
-            totalCourseWeights[it->second.getCourseId()] += it->second.getWeight();
+            totalCourseWeights[it->second.getCourseId()] = totalCourseWeights[it->second.getCourseId()] + it->second.getWeight();
         }
     }
 
@@ -23,7 +23,7 @@ bool testCourseWeights(unordered_map<int, Course> courses, unordered_map<int, Te
     return true;
 }
 
-unordered_map<int, Student> populateStudentCourses(unordered_map<int, Student> students, unordered_map<int, Course> courses, unordered_map<int, Test> tests, vector<Mark> marks) {
+map<int, Student> populateStudentCourses(map<int, Student> students, unordered_map<int, Course> courses, unordered_map<int, Test> tests, vector<Mark> marks) {
     for(vector<Mark>::iterator it = marks.begin(); it != marks.end(); it++) {
         int studentId = it->getStudentId();
         int testId = it->getTestId();
@@ -40,3 +40,4 @@ float percentToWeightedMark(int percent, int weight) {
     float weightedMark =  percent / 100.00 * weight; 
     return round(100 * weightedMark) / 100.0;
 }
+

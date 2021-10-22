@@ -109,7 +109,7 @@ unordered_map<int, Test> parseTests(const char* testsFileName) {
     return tests;
 }
 
-unordered_map<int , Student> parseStudents(const char* studentsFileName) {
+map<int , Student> parseStudents(const char* studentsFileName) {
 
     ifstream studentsFile;
 
@@ -121,7 +121,7 @@ unordered_map<int , Student> parseStudents(const char* studentsFileName) {
 
     string row;
     string word;
-    unordered_map<int, Student> students;
+    map<int, Student> students;
 
     //remove header row
     getline(studentsFile, row);
