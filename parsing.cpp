@@ -90,24 +90,20 @@ map<int, Test> parseTests(const char* testsFileName) {
 
         getline(ss, word, ',');
         word = removeOuterSpaces(word);
-        // std::cout << word << std::endl;
         int testId = stoi(word);
 
         getline(ss, word, ',');
         word = removeOuterSpaces(word);
-        // std::cout << word << std::endl;
 
         int courseId = stoi(word);
 
         getline(ss, word, ',');
         word = removeOuterSpaces(word);
-        // std::cout << word << std::endl;
 
         int weight = stoi(word);
 
 
         tests[testId] = Test(testId, courseId, weight);
-        // std::cout << "here1" << std::endl;
 
     }
 

@@ -26,6 +26,8 @@ string generateStudentJson(Student student) {
     
     map<int, StudentCourse> courses = student.getCoursesTaken();
     map<int, StudentCourse>::iterator stepAheadIterator;
+
+    //iterate through all student courses and convert to json objects
     for(map<int, StudentCourse>::iterator it = courses.begin(); it != courses.end(); it++) {
         ss << generateCourseJson(it->second);
         stepAheadIterator = it;
@@ -44,6 +46,8 @@ string generateJson(map<int, Student> students) {
     ss << "{\n";
     ss << "  \"students\": [\n";
     map<int, Student>::iterator stepAheadIterator;
+
+    //iterate through all student objects and convert to json objects
     for(map<int, Student>::iterator it = students.begin(); it != students.end(); it++) {
         ss << generateStudentJson(it->second);
         stepAheadIterator = it;
